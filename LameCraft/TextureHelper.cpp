@@ -78,6 +78,12 @@ void TextureHelper::Init()
 	FastLoadTexture("entity/sheep.png");
 	FastLoadTexture("entity/sheep_fur.png");
 	FastLoadTexture("title/background.png");
+	FastLoadTexture("title/notice.png");
+	FastLoadTexture("title/loading_screen.png");
+	FastLoadTexture("title/Xbutton.png");
+	FastLoadTexture("title/Circle.png");
+	FastLoadTexture("title/lang.png");
+	FastLoadTexture("title/s_lang.png");
 }
 
 int TextureHelper::GetTexture(Textures texture)
@@ -444,6 +450,42 @@ int TextureHelper::GetTexture(Textures texture)
 			return TextureManager::Instance()->GetTextureNumber(fileName);
 		}
 		break;
+		case notice:
+		{
+			fileName = texturePatch + "title/notice.png";
+			return TextureManager::Instance()->GetTextureNumber(fileName);
+		}
+		break;
+		case loading_screen:
+		{
+			fileName = texturePatch + "title/loading_screen.png";
+			return TextureManager::Instance()->GetTextureNumber(fileName);
+		}
+		break;
+		case button1:
+		{
+			fileName = texturePatch + "title/Xbutton.png";
+			return TextureManager::Instance()->GetTextureNumber(fileName);
+		}
+		break;
+		case button2:
+		{
+			fileName = texturePatch + "title/Circle.png";
+			return TextureManager::Instance()->GetTextureNumber(fileName);
+		}
+		break;
+		case lang:
+		{
+			fileName = texturePatch + "title/lang.png";
+			return TextureManager::Instance()->GetTextureNumber(fileName);
+		}
+		break;
+		case s_lang:
+		{
+			fileName = texturePatch + "title/s_lang.png";
+			return TextureManager::Instance()->GetTextureNumber(fileName);
+		}
+		break;
 	}
 	return 0;
 }
@@ -513,6 +555,12 @@ void TextureHelper::SetTexturePack(std::string name)
     FastLoadTexture("entity/sheep.png");
     FastLoadTexture("entity/sheep_fur.png");
     FastLoadTexture("title/background.png");
+	FastLoadTexture("title/notice.png");
+	FastLoadTexture("title/loading_screen.png");
+	FastLoadTexture("title/Xbutton.png");
+	FastLoadTexture("title/Circle.png");
+	FastLoadTexture("title/lang.png");
+	FastLoadTexture("title/s_lang.png");
 }
 
 void TextureHelper::FastRemoveTexture(std::string name)

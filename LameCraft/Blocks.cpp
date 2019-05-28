@@ -1638,7 +1638,7 @@ Torch::Torch():BaseBlock()
 
     name = "Torch block";
 
-    collideBox = BoundingBox(Vector3(-0.25f,-0.25f,-0.25f),Vector3(0.25f,0.25f,0.25f));
+    collideBox = BoundingBox(Vector3(-0.07f,-0.5f,-0.07f),Vector3(0.07f,0.15f,0.07f));
 }
 block_t Torch::getID(){ return 48;}
 
@@ -2601,7 +2601,7 @@ Mooshroom1::Mooshroom1():BaseBlock()
     update = 1;
     allowLight = true;
 
-    collideBox = BoundingBox(Vector3(-0.2f,-0.5f,-0.2f),Vector3(0.2f,0.35,0.2f));
+    collideBox = BoundingBox(Vector3(-0.2f,-0.4f,-0.2f),Vector3(0.2f,-0.1,0.2f));
 }
 block_t Mooshroom1::getID(){ return 77;}
 
@@ -2634,7 +2634,7 @@ Mooshroom2::Mooshroom2():BaseBlock()
     update = 1;
     allowLight = true;
 
-    collideBox = BoundingBox(Vector3(-0.2f,-0.5f,-0.2f),Vector3(0.2f,0.35,0.2f));
+    collideBox = BoundingBox(Vector3(-0.2f,-0.4f,-0.2f),Vector3(0.2f,-0.1,0.2f));
 }
 block_t Mooshroom2::getID(){ return 78;}
 
@@ -4029,7 +4029,7 @@ Flower1::Flower1():BaseBlock()
     allowLight = true;
     refraction = 0;
 
-    collideBox = BoundingBox(Vector3(-0.2f,-0.5f,-0.2f),Vector3(0.2f,0.35,0.2f));
+    collideBox = BoundingBox(Vector3(-0.2f,-0.5f,-0.2f),Vector3(0.2f,0.18,0.2f));
 }
 block_t Flower1::getID(){ return 119;}
 
@@ -4062,7 +4062,7 @@ Flower2::Flower2():BaseBlock()
     allowLight = true;
     refraction = 0;
 
-    collideBox = BoundingBox(Vector3(-0.2f,-0.5f,-0.2f),Vector3(0.2f,0.35,0.2f));
+    collideBox = BoundingBox(Vector3(-0.2f,-0.5f,-0.2f),Vector3(0.2f,0.05,0.2f));
 }
 block_t Flower2::getID(){ return 120;}
 

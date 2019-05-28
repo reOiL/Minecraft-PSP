@@ -20,6 +20,11 @@ using namespace Aurora::Graphics;
 Sprite* backSprite;
 Sprite* loadSprite;
 Sprite* subLoadSprite;
+Sprite* noticeSprite;
+Sprite* screenSprite;
+float bx, by;
+bool directionx;
+bool directiony;
 
 int LoadingScreen::readiness = 0;
 int LoadingScreen::stateName = 0;
@@ -41,20 +46,33 @@ void LoadingScreen::KillLoadingScreen()
 	delete backSprite;
 	delete loadSprite;
 	delete subLoadSprite;
+    delete noticeSprite;
+    delete screenSprite;
 }
 
 
 int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
 {
 	// load up the images
-	backSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Dirt),0,0,32,32);
-	backSprite->Scale(2,2);
+	screenSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::loading_screen));
+	screenSprite->Scale(2,2);
+    screenSprite->SetPosition(240,136);
+
+    bx = 240;
+    by = 136;
+    directionx = rand() % 2;
+    directiony = rand() % 2;
 
     loadSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Load),0,0,16,8);
 	loadSprite->Scale(1,0.5f);
 
     subLoadSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Load),0,8,16,8);
 	subLoadSprite->Scale(1,0.5f);
+
+    noticeSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::notice));
+	noticeSprite->SetPosition(240,233);
+
+
 
 
     int tip = rand() % 6;
@@ -69,17 +87,56 @@ int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
 		sceGuEnable(GU_BLEND);
 		sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-        for(int x = 0; x < 8; x++)
+        /*for(int x = 0; x < 8; x++)
         {
             for(int y = 0; y < 5; y++)
             {
                 backSprite->SetPosition(x*64,y*64);
                 backSprite->Draw();
-
-                sceGuDisable(GU_BLEND);
-                sceGuEnable(GU_DEPTH_TEST);
             }
+        }*/
+
+        if(bx >= 360)
+        {
+            directionx = false;
         }
+        if(bx <= 120)
+        {
+            directionx = true;
+        }
+
+        if(by >= 272-68)
+        {
+            directiony = false;
+        }
+        if(by <= 68)
+        {
+            directiony = true;
+        }
+
+        if(directionx == true)
+        {
+            bx += 1/6.0f;
+        }
+        else
+        {
+            bx -= 1/6.0f;
+        }
+
+        if(directiony == true)
+        {
+            by += 272.0f/960.0f/6.0f;
+        }
+        else
+        {
+            by -= 272.0f/960.0f/6.0f;
+        }
+
+        screenSprite->SetPosition(bx,by);
+        screenSprite->DrawLinear();
+
+        noticeSprite->SetPosition(240,233);
+		noticeSprite->Draw();
 
         if(readiness == 0)
         {
@@ -112,7 +169,7 @@ int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
 		sceGuEnable(GU_DEPTH_TEST);
 
 		//draw subtitles on buttons
-        RenderManager::InstancePtr()->SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200|0x00000000);
+        RenderManager::InstancePtr()->SetFontStyle(0.687,0xFFFFFFFF,0,0x00000200|0x00000000);
 
         if(RenderManager::InstancePtr()->GetFontLanguage() == ENGLISH)
         {
@@ -122,7 +179,7 @@ int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
             }
             else
             {
-                RenderManager::InstancePtr()->DebugPrint(240,103,"Generating level");
+
                 switch(stateName)
                 {
                     case 1:
@@ -184,7 +241,7 @@ int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
             }
             else
             {
-                RenderManager::InstancePtr()->DebugPrint(240,103,"Generaci^ mira");
+
                 switch(stateName)
                 {
                     case 1:

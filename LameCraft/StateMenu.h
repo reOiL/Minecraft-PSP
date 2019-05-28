@@ -144,6 +144,11 @@ private:
     bool directionx;
     bool directiony;
 
+	Sprite *button1Sprite;
+	Sprite *button2Sprite;
+	Sprite *langSprite;
+	Sprite *slangPrite;
+
     Sprite *buttonSmallSprite;
 	Sprite *sbuttonSmallSprite;
 	Sprite *nbuttonSmallSprite;
@@ -240,6 +245,7 @@ private:
 	int tpStart;
 	int tpPos;
 	int tpSelectPos;
+	int invPlayerTex;
 };
 
 #endif

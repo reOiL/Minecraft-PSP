@@ -79,6 +79,12 @@ public:
          sheepTexture,
          sheepFurTexture,
          background,
+         notice,
+         loading_screen,
+         button1,
+         button2,
+         lang,
+         s_lang,
 	};
     std::string texturePatch;
     std::string defaultFolder;

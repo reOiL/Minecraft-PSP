@@ -24,27 +24,27 @@
 #define HARDCORE 2
 
 /*
-q = э
-w = ш
-e = е
-y = ч
+q = пїЅ
+w = пїЅ
+e = пїЅ
+y = пїЅ
 u = y
-i = и
+i = пїЅ
 o = o
-p = п
-g = г
-j = ж
-z = з
-x = щ
-c = ц
-v = в
-~ = й
+p = пїЅ
+g = пїЅ
+j = пїЅ
+z = пїЅ
+x = пїЅ
+c = пїЅ
+v = пїЅ
+~ = пїЅ
 
-$ = ь
-& = ъ
-^ = я
-@ = ы
-# = ю
+$ = пїЅ
+& = пїЅ
+^ = пїЅ
+@ = пїЅ
+# = пїЅ
 */
 
 using namespace Aurora::Graphics;
@@ -98,7 +98,7 @@ void StateMenu::Init()
     mainStatistics.damageRecieved = 0;
     // end
 
-    // Инициализируем переменные опций
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     mainOptions.detailedSky = 1;
     mainOptions.smoothLighting = true;
     mainOptions.sounds = 1;
@@ -135,6 +135,15 @@ void StateMenu::Init()
     by = 136;
     directionx = rand() % 2;
     directiony = rand() % 2;
+
+    button1Sprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::button1));
+    button1Sprite->SetPosition(50,260);
+
+    button2Sprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::button2));
+    button2Sprite->SetPosition(50,260);
+
+    langSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::lang));
+    langSprite->SetPosition(100,240);
 
     rectFilledSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Rectangles),0,0,230,37);
     rectFilledSprite->SetPosition(240,150);
@@ -274,6 +283,9 @@ void StateMenu::CleanUp()
 
     delete backgroundSprite;
     delete blackBackground;
+    delete button1Sprite;
+    delete button2Sprite;
+    delete langSprite;
 }
 
 void StateMenu::Pause()
@@ -342,7 +354,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
         {
             selectPos--;
             if(selectPos < 0)
-                selectPos = 3;
+                selectPos = 5;
 
             mSoundMgr->PlayMenuSound();
         }
@@ -350,7 +362,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
         if(mSystemMgr->KeyPressed(PSP_CTRL_DOWN))
         {
             selectPos++;
-            if(selectPos > 3)
+            if(selectPos > 5)
                 selectPos = 0;
 
             mSoundMgr->PlayMenuSound();
@@ -415,6 +427,17 @@ void StateMenu::HandleEvents(StateManager* sManager)
                 tpEnd = texturePackList.size();
                 tpMax = 3;
                 ScanTexturePacks("Assets/Textures/");
+            }
+            if(selectPos == 4)
+            {
+                //changelog
+                menuState = 12;
+            }
+            if(selectPos == 5)
+            {
+                //localisation
+                menuState = -1;
+                selectPos = 0;
             }
         }
     }
@@ -1746,11 +1769,11 @@ void StateMenu::HandleEvents(StateManager* sManager)
                     short armorAm[4];
                     bool armorSt[4];
 
-                    for(int o = 0; o <= 35; o += 1) // Инициализация инвентаря
+                    for(int o = 0; o <= 35; o += 1) // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                     {
-                        invAm[o] = -1; // Количество вещей в ячейки = -1 (0)
-                        invId[o] = -1; // Id вещей в ячейке = -1 (ячейка пуста)
-                        invSt[o] = false; // Вещь в ячейке не стакается (по умолчанию)
+                        invAm[o] = -1; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ = -1 (0)
+                        invId[o] = -1; // Id пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ = -1 (пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ)
+                        invSt[o] = false; // пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
                     }
 
                     for(int o = 0; o <= 3; o += 1)
@@ -1992,6 +2015,46 @@ void StateMenu::HandleEvents(StateManager* sManager)
         }
     }
     break;
+    case 12://changelog
+    {
+        if(mSystemMgr->KeyPressed(PSP_CTRL_CIRCLE))
+        {
+            menuState = 0;
+        }
+    }
+    break;
+    case 13:// change localisation
+    {
+        //up, down
+        if(mSystemMgr->KeyPressed(PSP_CTRL_UP))
+        {
+            selectPos--;
+            if(selectPos < 0)
+                selectPos = 1;
+
+            mSoundMgr->PlayMenuSound();
+        }
+
+        if(mSystemMgr->KeyPressed(PSP_CTRL_DOWN))
+        {
+            selectPos++;
+            if(selectPos > 1)
+                selectPos = 0;
+
+            mSoundMgr->PlayMenuSound();
+        }
+
+        if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
+        {
+            RenderManager::InstancePtr()->defaultFontType = selectPos+1;
+            RenderManager::InstancePtr()->SetDefaultFont();
+            selectPos = 0;
+            menuState = 0;
+
+            SplashNumber = rand() % 6;
+        }
+    }
+    break;
     }
 }
 
@@ -2016,14 +2079,45 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuEnable(GU_BLEND);
         sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-        for(int x = 0; x < 8; x++)
+        if(bx >= 360)
         {
-            for(int y = 0; y < 5; y++)
-            {
-                backSprite->SetPosition(x*64,y*64);
-                backSprite->Draw();
-            }
+            directionx = false;
         }
+        if(bx <= 120)
+        {
+            directionx = true;
+        }
+
+        if(by >= 272-68)
+        {
+            directiony = false;
+        }
+        if(by <= 68)
+        {
+            directiony = true;
+        }
+
+        if(directionx == true)
+        {
+            bx += 1/6.0f;
+        }
+        else
+        {
+            bx -= 1/6.0f;
+        }
+
+        if(directiony == true)
+        {
+            by += 272.0f/960.0f/6.0f;
+        }
+        else
+        {
+            by -= 272.0f/960.0f/6.0f;
+        }
+
+
+        backgroundSprite->SetPosition(bx,by);
+        backgroundSprite->DrawLinear();
 
         // english
         buttonSprite->SetPosition(240,120);
@@ -2039,11 +2133,22 @@ void StateMenu::Draw(StateManager* sManager)
 
         sceGuDisable(GU_BLEND);
         sceGuEnable(GU_DEPTH_TEST);
-
+        
+        if(RenderManager::InstancePtr()->GetFontLanguage() == ENGLISH)
+        {
         selectPos == 0 ? DrawText(240,129,GU_COLOR(1,1,0.25,1) ,default_size,"English") : DrawText(240,129,GU_COLOR(1,1,1,1) ,default_size,"English");
         selectPos == 1 ? DrawText(240,169,GU_COLOR(1,1,0.25,1) ,default_size,"Russian") : DrawText(240,169,GU_COLOR(1,1,1,1) ,default_size,"Russian");
 
         DrawText(240,24,GU_COLOR(1,1,1,1) ,default_size,"Choose your language");
+        }
+
+        if(RenderManager::InstancePtr()->GetFontLanguage() == RUSSIAN)
+        {
+        selectPos == 0 ? DrawText(240,129,GU_COLOR(1,1,0.25,1) ,default_size,"Angli~ski~") : DrawText(240,129,GU_COLOR(1,1,1,1) ,default_size,"Angli~ski~");
+        selectPos == 1 ? DrawText(240,169,GU_COLOR(1,1,0.25,1) ,default_size,"Russki~") : DrawText(240,169,GU_COLOR(1,1,1,1) ,default_size,"Russki~");
+
+        DrawText(240,24,GU_COLOR(1,1,1,1) ,default_size,"V@beri svo~ ^z@k");
+        }
     }
     break;
     case 0://main menu
@@ -2100,27 +2205,42 @@ void StateMenu::Draw(StateManager* sManager)
 
         backgroundSprite->SetPosition(bx,by);
         backgroundSprite->DrawLinear();
+
+        button1Sprite->SetPosition(50,260);
+        button1Sprite->Draw();
+
+        langSprite->SetPosition(100,240);
+        langSprite->Draw();
+
         //logo
         lamecraftSprite->Draw();
 
         //singlePlayer
-        buttonSprite->SetPosition(240,120);
+        buttonSprite->SetPosition(240,110);
         buttonSprite->Draw();
 
         //options
-        buttonSprite->SetPosition(240,160);
+        buttonSprite->SetPosition(240,140);
         buttonSprite->Draw();
 
         //about
-        buttonSprite->SetPosition(240,200);
+        buttonSprite->SetPosition(240,170);
         buttonSprite->Draw();
 
         //texture pack
-        buttonSprite->SetPosition(240,240);
+        buttonSprite->SetPosition(240,200);
         buttonSprite->Draw();
 
+        //changelog
+        buttonSprite->SetPosition(240,230);
+        buttonSprite->Draw();
+
+        //change localisation
+        buttonSprite->SetPosition(240,260);
+        buttonSprite->Draw(); 
+
         //selected button
-        sbuttonSprite->SetPosition(240,(selectPos * 40) + 120);
+        sbuttonSprite->SetPosition(240,(selectPos * 30) + 110);
         sbuttonSprite->Draw();
 
         sceGuDisable(GU_BLEND);
@@ -2134,36 +2254,42 @@ void StateMenu::Draw(StateManager* sManager)
 
         if(RenderManager::InstancePtr()->GetFontLanguage() == ENGLISH)
         {
-            selectPos == 0 ? DrawText(240,129,GU_COLOR(1,1,0.25,1) ,default_size,"Singleplayer") : DrawText(240,129,GU_COLOR(1,1,1,1) ,default_size,"Singleplayer");
-            selectPos == 1 ? DrawText(240,169,GU_COLOR(1,1,0.25,1) ,default_size,"Options") : DrawText(240,169,GU_COLOR(1,1,1,1) ,default_size,"Options");
-            selectPos == 2 ? DrawText(240,209,GU_COLOR(1,1,0.25,1) ,default_size,"About & Converter") : DrawText(240,209,GU_COLOR(1,1,1,1) ,default_size,"About & Converter");
-            selectPos == 3 ? DrawText(240,249,GU_COLOR(1,1,0.25,1) ,default_size,"Texture Packs") : DrawText(240,249,GU_COLOR(1,1,1,1) ,default_size,"Texture Packs");
+            selectPos == 0 ? DrawText(240,119,GU_COLOR(1,1,0.25,1) ,default_size,"Singleplayer") : DrawText(240,119,GU_COLOR(1,1,1,1) ,default_size,"Singleplayer");
+            selectPos == 1 ? DrawText(240,149,GU_COLOR(1,1,0.25,1) ,default_size,"Options") : DrawText(240,149,GU_COLOR(1,1,1,1) ,default_size,"Options");
+            selectPos == 2 ? DrawText(240,179,GU_COLOR(1,1,0.25,1) ,default_size,"About & Converter") : DrawText(240,179,GU_COLOR(1,1,1,1) ,default_size,"About & Converter");
+            selectPos == 3 ? DrawText(240,209,GU_COLOR(1,1,0.25,1) ,default_size,"Texture Packs") : DrawText(240,209,GU_COLOR(1,1,1,1) ,default_size,"Texture Packs");
+            selectPos == 4 ? DrawText(240,239,GU_COLOR(1,1,0.25,1) ,default_size,"What's New?") : DrawText(240,239,GU_COLOR(1,1,1,1) ,default_size,"What's New?");
+            selectPos == 5 ? DrawText(240,269,GU_COLOR(1,1,0.25,1) ,default_size,"Language") : DrawText(240,269,GU_COLOR(1,1,1,1) ,default_size,"Language");
+            DrawText(90,269,GU_COLOR(1,1,1,1) ,default_size,"Choose"); 
 
 
             switch(SplashNumber)
             {
-                case 0: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Uses C++!"); break;
-                case 1: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Fan fiction!"); break;
-                case 2: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Made on Lamecraft op-30!"); break;
-                case 3: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"More polygons!"); break;
-                case 4: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"there is no grass"); break;
-                case 5: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Not approved by Mojang"); break;
+                case 0: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"Uses C++!"); break;
+                case 1: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"Fan fiction!"); break;
+                case 2: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"Made on Lamecraft op-30!"); break;
+                case 3: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"More polygons!"); break;
+                case 4: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"there is no grass"); break;
+                case 5: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"Not approved by Mojang"); break;
             }
         }
         if(RenderManager::InstancePtr()->GetFontLanguage() == RUSSIAN)
         {
-            selectPos == 0 ? DrawText(240,129,GU_COLOR(1,1,0.25,1) ,default_size,"Odinoyna^ igra") : DrawText(240,129,GU_COLOR(1,1,1,1) ,default_size,"Odinoyna^ igra");
-            selectPos == 1 ? DrawText(240,169,GU_COLOR(1,1,0.25,1) ,default_size,"Nastro~ki") : DrawText(240,169,GU_COLOR(1,1,1,1) ,default_size,"Nastro~ki");
-            selectPos == 2 ? DrawText(240,209,GU_COLOR(1,1,0.25,1) ,default_size,"Ob igre i Konverter") : DrawText(240,209,GU_COLOR(1,1,1,1) ,default_size,"Ob igre i Konverter");
-            selectPos == 3 ? DrawText(240,249,GU_COLOR(1,1,0.25,1) ,default_size,"Tekstur@") : DrawText(240,249,GU_COLOR(1,1,1,1) ,default_size,"Tekstur@");
+            selectPos == 0 ? DrawText(240,119,GU_COLOR(1,1,0.25,1) ,default_size,"Odinoyna^ igra") : DrawText(240,119,GU_COLOR(1,1,1,1) ,default_size,"Odinoyna^ igra");
+            selectPos == 1 ? DrawText(240,149,GU_COLOR(1,1,0.25,1) ,default_size,"Nastro~ki") : DrawText(240,149,GU_COLOR(1,1,1,1) ,default_size,"Nastro~ki");
+            selectPos == 2 ? DrawText(240,179,GU_COLOR(1,1,0.25,1) ,default_size,"Ob igre i Konverter") : DrawText(240,179,GU_COLOR(1,1,1,1) ,default_size,"Ob igre i Konverter");
+            selectPos == 3 ? DrawText(240,209,GU_COLOR(1,1,0.25,1) ,default_size,"Tekstur@") : DrawText(240,209,GU_COLOR(1,1,1,1) ,default_size,"Tekstur@");
+            selectPos == 4 ? DrawText(240,239,GU_COLOR(1,1,0.25,1) ,default_size,"Yto Novogo?") : DrawText(240,239,GU_COLOR(1,1,1,1) ,default_size,"Yto Novogo?");
+            selectPos == 5 ? DrawText(240,269,GU_COLOR(1,1,0.25,1) ,default_size,"Lokalizaci^") : DrawText(240,269,GU_COLOR(1,1,1,1) ,default_size,"Lokalizaci^");
+            DrawText(90,269,GU_COLOR(1,1,1,1) ,default_size,"V@bor");
 
             switch(SplashNumber)
             {
-                case 0: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Na S++!"); break;
-                case 1: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Fanatska^ rabota!"); break;
-                case 2: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Uje 3 goda s vami!"); break;
-                case 3: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Bol$we poligonov!"); break;
-                case 4: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"zdes$ net trav@"); break;
+                case 0: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"Na S++!"); break;
+                case 1: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"Fanatska^ rabota!"); break;
+                case 2: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"Uje 3 goda s vami!"); break;
+                case 3: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"Bol$we poligonov!"); break;
+                case 4: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"zdes$ net trav@"); break;
                 case 5: {
                             DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Ne odobreno ");
                             RenderManager::InstancePtr()->SetFont(ENGLISH);
@@ -2180,14 +2306,45 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuEnable(GU_BLEND);
         sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-        for(int x = 0; x < 8; x++)
+        if(bx >= 360)
         {
-            for(int y = 0; y < 5; y++)
-            {
-                backSprite->SetPosition(x*64,y*64);
-                backSprite->Draw();
-            }
+            directionx = false;
         }
+        if(bx <= 120)
+        {
+            directionx = true;
+        }
+
+        if(by >= 272-68)
+        {
+            directiony = false;
+        }
+        if(by <= 68)
+        {
+            directiony = true;
+        }
+
+        if(directionx == true)
+        {
+            bx += 1/6.0f;
+        }
+        else
+        {
+            bx -= 1/6.0f;
+        }
+
+        if(directiony == true)
+        {
+            by += 272.0f/960.0f/6.0f;
+        }
+        else
+        {
+            by -= 272.0f/960.0f/6.0f;
+        }
+
+
+        backgroundSprite->SetPosition(bx,by);
+        backgroundSprite->DrawLinear();
 
         if(saveSubmenu) // delete world
         {
@@ -2449,14 +2606,54 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuEnable(GU_BLEND);
         sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-        for(int x = 0; x < 8; x++)
+        /*for(int x = 0; x < 8; x++)
         {
             for(int y = 0; y < 5; y++)
             {
                 backSprite->SetPosition(x*64,y*64);
                 backSprite->Draw();
             }
+        }*/
+
+        if(bx >= 360)
+        {
+            directionx = false;
         }
+        if(bx <= 120)
+        {
+            directionx = true;
+        }
+
+        if(by >= 272-68)
+        {
+            directiony = false;
+        }
+        if(by <= 68)
+        {
+            directiony = true;
+        }
+
+        if(directionx == true)
+        {
+            bx += 1/6.0f;
+        }
+        else
+        {
+            bx -= 1/6.0f;
+        }
+
+        if(directiony == true)
+        {
+            by += 272.0f/960.0f/6.0f;
+        }
+        else
+        {
+            by -= 272.0f/960.0f/6.0f;
+        }
+
+
+        backgroundSprite->SetPosition(bx,by);
+        backgroundSprite->DrawLinear();
 
         //check for update
         buttonSprite->SetPosition(240,225);
@@ -2477,29 +2674,26 @@ void StateMenu::Draw(StateManager* sManager)
         if(mRender->GetFontLanguage() == ENGLISH)
         {
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            mRender->DebugPrint(40,100-40,"Author:");
+            mRender->DebugPrint(40,100-40,"Developers:");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,100-40,"Marcin Ploska(Drakon)");
-
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            mRender->DebugPrint(40,124-40,"Modder:");
+            mRender->DebugPrint(440,100-40,"Joseph730,");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,124-40,"Kirill Skibin(Woolio)");
+            mRender->DebugPrint(440,124-40,"reOiL");
 
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
             mRender->DebugPrint(40,172-40,"Website:");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,172-40,"vk.com/mine_psp");
+            mRender->DebugPrint(440,172-40,"discord.gg/u8kf2Zd");
 
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
             mRender->DebugPrint(40,196-40,"Version:");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,196-40,"2.0");
+            mRender->DebugPrint(440,196-40,"2.2");
 
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
             mRender->DebugPrint(40,220-40,"Development stage:");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,220-40,"Release");
+            mRender->DebugPrint(440,220-40,"Test");
 
             aboutPos == 0 ? DrawText(240,234,GU_COLOR(1,1,0.25,1) ,default_size,"Converter") : DrawText(240,234,GU_COLOR(1,1,1,1) ,default_size,"Converter");
             aboutPos == 1 ? DrawText(240,264,GU_COLOR(1,1,0.25,1) ,default_size,"Cancel") : DrawText(240,264,GU_COLOR(1,1,1,1) ,default_size,"Cancel");
@@ -2508,32 +2702,29 @@ void StateMenu::Draw(StateManager* sManager)
         if(mRender->GetFontLanguage() == RUSSIAN)
         {
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            mRender->DebugPrint(40,100-40,"Dvijok igr@:");
+            mRender->DebugPrint(40,100-40,"Razrabotyiki:");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,100-40,"Marsin Ploska(Drakon)");
-
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            mRender->DebugPrint(40,124-40,"Modifikaci^:");
+            mRender->DebugPrint(440,100-40,"Iosif Zaharyenko,");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,124-40,"Kirill Skibin(Volio)");
+            mRender->DebugPrint(440,124-40,"Griwa Le~kin");
 
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
             mRender->DebugPrint(40,172-40,"Vebsa~t:");
 
             mRender->SetFont(ENGLISH);
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,172-40,"vk.com/mine_psp");
+            mRender->DebugPrint(440,172-40,"discord.gg/u8kf2Zd");
             mRender->SetDefaultFont();
 
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
             mRender->DebugPrint(40,196-40,"Versi^:");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,196-40,"2.0");
+            mRender->DebugPrint(440,196-40,"2.2");
 
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
             mRender->DebugPrint(40,220-40,"Stadi^ razrabotki:");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,220-40,"Reliz");
+            mRender->DebugPrint(440,220-40,"Test");
 
             aboutPos == 0 ? DrawText(240,234,GU_COLOR(1,1,0.25,1) ,default_size,"Konverter") : DrawText(240,234,GU_COLOR(1,1,1,1) ,default_size,"Konverter");
             aboutPos == 1 ? DrawText(240,264,GU_COLOR(1,1,0.25,1) ,default_size,"Otmena") : DrawText(240,264,GU_COLOR(1,1,1,1) ,default_size,"Otmena");
@@ -2549,14 +2740,54 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuEnable(GU_BLEND);
         sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-        for(int x = 0; x < 8; x++)
+        /*for(int x = 0; x < 8; x++)
         {
             for(int y = 0; y < 5; y++)
             {
                 backSprite->SetPosition(x*64,y*64);
                 backSprite->Draw();
             }
+        }*/
+
+        if(bx >= 360)
+        {
+            directionx = false;
         }
+        if(bx <= 120)
+        {
+            directionx = true;
+        }
+
+        if(by >= 272-68)
+        {
+            directiony = false;
+        }
+        if(by <= 68)
+        {
+            directiony = true;
+        }
+
+        if(directionx == true)
+        {
+            bx += 1/6.0f;
+        }
+        else
+        {
+            bx -= 1/6.0f;
+        }
+
+        if(directiony == true)
+        {
+            by += 272.0f/960.0f/6.0f;
+        }
+        else
+        {
+            by -= 272.0f/960.0f/6.0f;
+        }
+
+
+        backgroundSprite->SetPosition(bx,by);
+        backgroundSprite->DrawLinear();
 
 
         //name
@@ -2682,14 +2913,54 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuEnable(GU_BLEND);
         sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-        for(int x = 0; x < 8; x++)
+        /*for(int x = 0; x < 8; x++)
         {
             for(int y = 0; y < 5; y++)
             {
                 backSprite->SetPosition(x*64,y*64);
                 backSprite->Draw();
             }
+        }*/
+
+        if(bx >= 360)
+        {
+            directionx = false;
         }
+        if(bx <= 120)
+        {
+            directionx = true;
+        }
+
+        if(by >= 272-68)
+        {
+            directiony = false;
+        }
+        if(by <= 68)
+        {
+            directiony = true;
+        }
+
+        if(directionx == true)
+        {
+            bx += 1/6.0f;
+        }
+        else
+        {
+            bx -= 1/6.0f;
+        }
+
+        if(directiony == true)
+        {
+            by += 272.0f/960.0f/6.0f;
+        }
+        else
+        {
+            by -= 272.0f/960.0f/6.0f;
+        }
+
+
+        backgroundSprite->SetPosition(bx,by);
+        backgroundSprite->DrawLinear();
 
         //check for update
         buttonSprite->SetPosition(240,165);
@@ -2791,14 +3062,54 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuEnable(GU_BLEND);
         sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-        for(int x = 0; x < 8; x++)
+        /*for(int x = 0; x < 8; x++)
         {
             for(int y = 0; y < 5; y++)
             {
                 backSprite->SetPosition(x*64,y*64);
                 backSprite->Draw();
             }
+        }*/
+
+        if(bx >= 360)
+        {
+            directionx = false;
         }
+        if(bx <= 120)
+        {
+            directionx = true;
+        }
+
+        if(by >= 272-68)
+        {
+            directiony = false;
+        }
+        if(by <= 68)
+        {
+            directiony = true;
+        }
+
+        if(directionx == true)
+        {
+            bx += 1/6.0f;
+        }
+        else
+        {
+            bx -= 1/6.0f;
+        }
+
+        if(directiony == true)
+        {
+            by += 272.0f/960.0f/6.0f;
+        }
+        else
+        {
+            by -= 272.0f/960.0f/6.0f;
+        }
+
+
+        backgroundSprite->SetPosition(bx,by);
+        backgroundSprite->DrawLinear();
 
         buttonSprite->SetPosition(240,100);
         buttonSprite->Draw();
@@ -2834,14 +3145,54 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuEnable(GU_BLEND);
         sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-        for(int x = 0; x < 8; x++)
+        /*for(int x = 0; x < 8; x++)
         {
             for(int y = 0; y < 5; y++)
             {
                 backSprite->SetPosition(x*64,y*64);
                 backSprite->Draw();
             }
+        }*/
+
+        if(bx >= 360)
+        {
+            directionx = false;
         }
+        if(bx <= 120)
+        {
+            directionx = true;
+        }
+
+        if(by >= 272-68)
+        {
+            directiony = false;
+        }
+        if(by <= 68)
+        {
+            directiony = true;
+        }
+
+        if(directionx == true)
+        {
+            bx += 1/6.0f;
+        }
+        else
+        {
+            bx -= 1/6.0f;
+        }
+
+        if(directiony == true)
+        {
+            by += 272.0f/960.0f/6.0f;
+        }
+        else
+        {
+            by -= 272.0f/960.0f/6.0f;
+        }
+
+
+        backgroundSprite->SetPosition(bx,by);
+        backgroundSprite->DrawLinear();
 
         //select sprite
         if(texturePackList.size() > 0)
@@ -2928,6 +3279,77 @@ void StateMenu::Draw(StateManager* sManager)
             tpSelectPos == 0 ? DrawText(120,263,GU_COLOR(1,1,0.25,1),default_size,"V@brat$") : DrawText(120,263,GU_COLOR(1,1,1,1),default_size,"V@brat$");
             tpSelectPos == 1 ? DrawText(360,263,GU_COLOR(1,1,0.25,1) ,default_size,"Otmena") : DrawText(360,263,GU_COLOR(1,1,1,1) ,default_size,"Otmena");
         }
+    }
+    break;
+    case 12://changelog
+    {
+        sceGuDisable(GU_DEPTH_TEST);
+        sceGuEnable(GU_BLEND);
+        sceGuColor(GU_COLOR(1,1,1,1.0f));
+
+        if(bx >= 360)
+        {
+            directionx = false;
+        }
+        if(bx <= 120)
+        {
+            directionx = true;
+        }
+
+        if(by >= 272-68)
+        {
+            directiony = false;
+        }
+        if(by <= 68)
+        {
+            directiony = true;
+        }
+
+        if(directionx == true)
+        {
+            bx += 1/6.0f;
+        }
+        else
+        {
+            bx -= 1/6.0f;
+        }
+
+        if(directiony == true)
+        {
+            by += 272.0f/960.0f/6.0f;
+        }
+        else
+        {
+            by -= 272.0f/960.0f/6.0f;
+        }
+
+        
+        backgroundSprite->SetPosition(bx,by);
+        backgroundSprite->DrawLinear();
+
+        blackBackground->Draw();
+
+        button2Sprite->SetPosition(50,260);
+        button2Sprite->Draw();
+
+        if(RenderManager::InstancePtr()->GetFontLanguage() == ENGLISH)
+        {
+            DrawText(90,269,GU_COLOR(1,1,1,1) ,default_size,"Back");
+            DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Last Changes");
+        }
+
+        if(RenderManager::InstancePtr()->GetFontLanguage() == RUSSIAN)
+        {
+            DrawText(90,269,GU_COLOR(1,1,1,1) ,default_size,"Nazad");
+            DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Poslednie izmeneni^");
+        }
+    }
+    break;
+    case 13://localisation
+    {
+        //selected button
+        sbuttonSprite->SetPosition(240,(selectPos * 40) + 120);
+        sbuttonSprite->Draw();
     }
     break;
     }
@@ -3071,7 +3493,7 @@ void StateMenu::ScanTexturePacks(const char* dirName)
             size_t found2 = plik.find("..");
             size_t found3 = plik.find(".svn");
 
-            if(found==std::string::npos && found2==std::string::npos && found3==std::string::npos)//не найдено
+            if(found==std::string::npos && found2==std::string::npos && found3==std::string::npos)//пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             {
                 TP newTP;
 
