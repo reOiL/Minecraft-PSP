@@ -26,6 +26,15 @@ void StateOptions::Init()
 	mSystemMgr = SystemManager::Instance();
 	mSoundMgr = SoundManager::Instance();
 
+	backgroundSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::background));
+	backgroundSprite->Scale(2, 2);
+	backgroundSprite->SetPosition(240, 136);
+
+	bx = 240;
+	by = 136;
+	directionx = rand() % 2;
+	directiony = rand() % 2;
+
 	buttonSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,0,95,12);
     buttonSprite->SetPosition(240,150);
     buttonSprite->Scale(2,2);
@@ -79,6 +88,7 @@ void StateOptions::Enter()
 
 void StateOptions::CleanUp()
 {
+	delete backgroundSprite;
 	delete buttonSprite;
     delete nbuttonSprite;
 	delete sbuttonSprite;
@@ -425,14 +435,44 @@ void StateOptions::Draw(StateManager* sManager)
 			sceGuEnable(GU_BLEND);
 			sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-            for(int x = 0; x < 8; x++)
-            {
-                for(int y = 0; y < 5; y++)
-                {
-                    backSprite->SetPosition(x*64,y*64);
-                    backSprite->Draw();
-                }
-            }
+			if (bx >= 360)
+			{
+				directionx = false;
+			}
+			if (bx <= 120)
+			{
+				directionx = true;
+			}
+
+			if (by >= 272 - 68)
+			{
+				directiony = false;
+			}
+			if (by <= 68)
+			{
+				directiony = true;
+			}
+
+			if (directionx == true)
+			{
+				bx += 1 / 6.0f;
+			}
+			else
+			{
+				bx -= 1 / 6.0f;
+			}
+
+			if (directiony == true)
+			{
+				by += 272.0f / 960.0f / 6.0f;
+			}
+			else
+			{
+				by -= 272.0f / 960.0f / 6.0f;
+			}
+
+			backgroundSprite->SetPosition(bx, by);
+			backgroundSprite->DrawLinear();
 
 
 			//Controls
@@ -446,6 +486,7 @@ void StateOptions::Draw(StateManager* sManager)
 			//back
 			buttonSprite->SetPosition(240,200);
 			buttonSprite->Draw();
+
 
 
 			//selected button
@@ -481,14 +522,44 @@ void StateOptions::Draw(StateManager* sManager)
 			sceGuEnable(GU_BLEND);
 			sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-            for(int x = 0; x < 8; x++)
-            {
-                for(int y = 0; y < 5; y++)
-                {
-                    backSprite->SetPosition(x*64,y*64);
-                    backSprite->Draw();
-                }
-            }
+			if (bx >= 360)
+			{
+				directionx = false;
+			}
+			if (bx <= 120)
+			{
+				directionx = true;
+			}
+
+			if (by >= 272 - 68)
+			{
+				directiony = false;
+			}
+			if (by <= 68)
+			{
+				directiony = true;
+			}
+
+			if (directionx == true)
+			{
+				bx += 1 / 6.0f;
+			}
+			else
+			{
+				bx -= 1 / 6.0f;
+			}
+
+			if (directiony == true)
+			{
+				by += 272.0f / 960.0f / 6.0f;
+			}
+			else
+			{
+				by -= 272.0f / 960.0f / 6.0f;
+			}
+
+			backgroundSprite->SetPosition(bx, by);
+			backgroundSprite->DrawLinear();
 
 
 			int starty = 60;
@@ -561,14 +632,44 @@ void StateOptions::Draw(StateManager* sManager)
 			sceGuEnable(GU_BLEND);
 			sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-            for(int x = 0; x < 8; x++)
-            {
-                for(int y = 0; y < 5; y++)
-                {
-                    backSprite->SetPosition(x*64,y*64);
-                    backSprite->Draw();
-                }
-            }
+			if (bx >= 360)
+			{
+				directionx = false;
+			}
+			if (bx <= 120)
+			{
+				directionx = true;
+			}
+
+			if (by >= 272 - 68)
+			{
+				directiony = false;
+			}
+			if (by <= 68)
+			{
+				directiony = true;
+			}
+
+			if (directionx == true)
+			{
+				bx += 1 / 6.0f;
+			}
+			else
+			{
+				bx -= 1 / 6.0f;
+			}
+
+			if (directiony == true)
+			{
+				by += 272.0f / 960.0f / 6.0f;
+			}
+			else
+			{
+				by -= 272.0f / 960.0f / 6.0f;
+			}
+
+			backgroundSprite->SetPosition(bx, by);
+			backgroundSprite->DrawLinear();
 
 			//something
 			nbuttonSprite->SetPosition(240,100);
@@ -586,6 +687,8 @@ void StateOptions::Draw(StateManager* sManager)
 			//back
 			buttonSprite->SetPosition(240,260);
 			buttonSprite->Draw();
+
+
 
 			if(currentAnalogPos < 4)
 			{
@@ -631,6 +734,7 @@ void StateOptions::Draw(StateManager* sManager)
                 mRender->DebugPrint(240,269,"Cancel");
 
                 DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Analog stick");
+
             }
             if(mRender->GetFontLanguage() == RUSSIAN)
             {

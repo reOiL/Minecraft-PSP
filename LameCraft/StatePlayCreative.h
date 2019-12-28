@@ -275,6 +275,9 @@ private:
 	Sprite *crossSprite;
 	Sprite *selectSprite;
 
+	Sprite *cstc_buttonSprite;
+	Sprite *LTriggerSprite;
+
 	Sprite *furArrowSprite[22];
 	Sprite *furFireSprite[14];
     Sprite *furSprite;

@@ -82,8 +82,8 @@ void TextureHelper::Init()
 	FastLoadTexture("title/loading_screen.png");
 	FastLoadTexture("title/Xbutton.png");
 	FastLoadTexture("title/Circle.png");
-	FastLoadTexture("title/lang.png");
-	FastLoadTexture("title/s_lang.png");
+	FastLoadTexture("title/cstc.png");
+	FastLoadTexture("title/LTrigger.png");
 }
 
 int TextureHelper::GetTexture(Textures texture)
@@ -474,18 +474,19 @@ int TextureHelper::GetTexture(Textures texture)
 			return TextureManager::Instance()->GetTextureNumber(fileName);
 		}
 		break;
-		case lang:
+		case cstc_button:
 		{
-			fileName = texturePatch + "title/lang.png";
+			fileName = texturePatch + "title/cstc.png";
 			return TextureManager::Instance()->GetTextureNumber(fileName);
 		}
 		break;
-		case s_lang:
+		case LTrigger:
 		{
-			fileName = texturePatch + "title/s_lang.png";
+			fileName = texturePatch + "title/LTrigger.png";
 			return TextureManager::Instance()->GetTextureNumber(fileName);
 		}
 		break;
+
 	}
 	return 0;
 }
@@ -559,8 +560,8 @@ void TextureHelper::SetTexturePack(std::string name)
 	FastLoadTexture("title/loading_screen.png");
 	FastLoadTexture("title/Xbutton.png");
 	FastLoadTexture("title/Circle.png");
-	FastLoadTexture("title/lang.png");
-	FastLoadTexture("title/s_lang.png");
+	FastLoadTexture("title/cstc.png");
+	FastLoadTexture("title/LTrigger.png");
 }
 
 void TextureHelper::FastRemoveTexture(std::string name)

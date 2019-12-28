@@ -48,6 +48,10 @@ private:
 	Sprite *moverSprite;
 	Sprite *smoverSprite;
 	Sprite *backSprite;
+	Sprite *backgroundSprite;
+	float bx, by;
+	bool directionx;
+	bool directiony;
 
 	RenderManager *mRender;
 	SystemManager *mSystemMgr;

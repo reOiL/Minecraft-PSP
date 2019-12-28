@@ -142,9 +142,6 @@ void StateMenu::Init()
     button2Sprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::button2));
     button2Sprite->SetPosition(50,260);
 
-    langSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::lang));
-    langSprite->SetPosition(100,240);
-
     rectFilledSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Rectangles),0,0,230,37);
     rectFilledSprite->SetPosition(240,150);
     rectFilledSprite->Scale(2,2);
@@ -285,7 +282,6 @@ void StateMenu::CleanUp()
     delete blackBackground;
     delete button1Sprite;
     delete button2Sprite;
-    delete langSprite;
 }
 
 void StateMenu::Pause()
@@ -2115,6 +2111,7 @@ void StateMenu::Draw(StateManager* sManager)
             by -= 272.0f/960.0f/6.0f;
         }
 
+		
 
         backgroundSprite->SetPosition(bx,by);
         backgroundSprite->DrawLinear();
@@ -2131,8 +2128,13 @@ void StateMenu::Draw(StateManager* sManager)
         sbuttonSprite->SetPosition(240,(selectPos * 40) + 120);
         sbuttonSprite->Draw();
 
+		button1Sprite->SetPosition(50, 260);
+		button1Sprite->Draw();
+
         sceGuDisable(GU_BLEND);
         sceGuEnable(GU_DEPTH_TEST);
+
+		
         
         if(RenderManager::InstancePtr()->GetFontLanguage() == ENGLISH)
         {
@@ -2140,6 +2142,7 @@ void StateMenu::Draw(StateManager* sManager)
         selectPos == 1 ? DrawText(240,169,GU_COLOR(1,1,0.25,1) ,default_size,"Russian") : DrawText(240,169,GU_COLOR(1,1,1,1) ,default_size,"Russian");
 
         DrawText(240,24,GU_COLOR(1,1,1,1) ,default_size,"Choose your language");
+		DrawText(90, 269, GU_COLOR(1, 1, 1, 1), default_size, "Choose");
         }
 
         if(RenderManager::InstancePtr()->GetFontLanguage() == RUSSIAN)
@@ -2148,6 +2151,7 @@ void StateMenu::Draw(StateManager* sManager)
         selectPos == 1 ? DrawText(240,169,GU_COLOR(1,1,0.25,1) ,default_size,"Russki~") : DrawText(240,169,GU_COLOR(1,1,1,1) ,default_size,"Russki~");
 
         DrawText(240,24,GU_COLOR(1,1,1,1) ,default_size,"V@beri svo~ ^z@k");
+		DrawText(90, 269, GU_COLOR(1, 1, 1, 1), default_size, "V@bor");
         }
     }
     break;
@@ -2209,9 +2213,6 @@ void StateMenu::Draw(StateManager* sManager)
         button1Sprite->SetPosition(50,260);
         button1Sprite->Draw();
 
-        langSprite->SetPosition(100,240);
-        langSprite->Draw();
-
         //logo
         lamecraftSprite->Draw();
 
@@ -2261,6 +2262,7 @@ void StateMenu::Draw(StateManager* sManager)
             selectPos == 4 ? DrawText(240,239,GU_COLOR(1,1,0.25,1) ,default_size,"What's New?") : DrawText(240,239,GU_COLOR(1,1,1,1) ,default_size,"What's New?");
             selectPos == 5 ? DrawText(240,269,GU_COLOR(1,1,0.25,1) ,default_size,"Language") : DrawText(240,269,GU_COLOR(1,1,1,1) ,default_size,"Language");
             DrawText(90,269,GU_COLOR(1,1,1,1) ,default_size,"Choose"); 
+			DrawText(444, 269, GU_COLOR(1, 1, 1, 1), default_size, "v.2.2.1b");
 
 
             switch(SplashNumber)
@@ -2271,6 +2273,8 @@ void StateMenu::Draw(StateManager* sManager)
                 case 3: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"More polygons!"); break;
                 case 4: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"there is no grass"); break;
                 case 5: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"Not approved by Mojang"); break;
+				case 6: DrawText(348, 86, GU_COLOR(1, 1, 0, 1), 0.4 + sinf(splashSize) * 0.03f, "New build!"); break;
+				case 7: DrawText(348, 86, GU_COLOR(1, 1, 0, 1), 0.4 + sinf(splashSize) * 0.03f, "Happy New Year!"); break;
             }
         }
         if(RenderManager::InstancePtr()->GetFontLanguage() == RUSSIAN)
@@ -2282,6 +2286,10 @@ void StateMenu::Draw(StateManager* sManager)
             selectPos == 4 ? DrawText(240,239,GU_COLOR(1,1,0.25,1) ,default_size,"Yto Novogo?") : DrawText(240,239,GU_COLOR(1,1,1,1) ,default_size,"Yto Novogo?");
             selectPos == 5 ? DrawText(240,269,GU_COLOR(1,1,0.25,1) ,default_size,"Lokalizaci^") : DrawText(240,269,GU_COLOR(1,1,1,1) ,default_size,"Lokalizaci^");
             DrawText(90,269,GU_COLOR(1,1,1,1) ,default_size,"V@bor");
+			RenderManager::InstancePtr()->SetFont(ENGLISH);
+			DrawText(444, 269, GU_COLOR(1, 1, 1, 1), default_size, "v.2.2.1b");
+			mRender->SetDefaultFont();
+
 
             switch(SplashNumber)
             {
@@ -2296,6 +2304,8 @@ void StateMenu::Draw(StateManager* sManager)
                             DrawText(328,84,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"                Mojang");
                             RenderManager::InstancePtr()->SetDefaultFont();
                         } break;
+				case 6: DrawText(348, 86, GU_COLOR(1, 1, 0, 1), 0.4 + sinf(splashSize) * 0.03f, "Nov@~ bild!"); break;
+				case 7: DrawText(348, 86, GU_COLOR(1, 1, 0, 1), 0.4 + sinf(splashSize) * 0.03f, "S Nov@m Godom!"); break;
             }
         }
     }
@@ -2668,6 +2678,9 @@ void StateMenu::Draw(StateManager* sManager)
 
         blackBackground->Draw();
 
+		button1Sprite->SetPosition(50, 260);
+		button1Sprite->Draw();
+
         sceGuDisable(GU_BLEND);
         sceGuEnable(GU_DEPTH_TEST);
 
@@ -2679,6 +2692,8 @@ void StateMenu::Draw(StateManager* sManager)
             mRender->DebugPrint(440,100-40,"Joseph730,");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
             mRender->DebugPrint(440,124-40,"reOiL");
+			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
+			mRender->DebugPrint(440, 148 - 40, "Answored");
 
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
             mRender->DebugPrint(40,172-40,"Website:");
@@ -2688,16 +2703,17 @@ void StateMenu::Draw(StateManager* sManager)
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
             mRender->DebugPrint(40,196-40,"Version:");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,196-40,"2.2");
+            mRender->DebugPrint(440,196-40,"2.2.1b");
 
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
             mRender->DebugPrint(40,220-40,"Development stage:");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,220-40,"Test");
+            mRender->DebugPrint(440,220-40,"Beta");
 
             aboutPos == 0 ? DrawText(240,234,GU_COLOR(1,1,0.25,1) ,default_size,"Converter") : DrawText(240,234,GU_COLOR(1,1,1,1) ,default_size,"Converter");
             aboutPos == 1 ? DrawText(240,264,GU_COLOR(1,1,0.25,1) ,default_size,"Cancel") : DrawText(240,264,GU_COLOR(1,1,1,1) ,default_size,"Cancel");
             DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"About");
+			DrawText(90, 269, GU_COLOR(1, 1, 1, 1), default_size, "Choose");
         }
         if(mRender->GetFontLanguage() == RUSSIAN)
         {
@@ -2707,6 +2723,8 @@ void StateMenu::Draw(StateManager* sManager)
             mRender->DebugPrint(440,100-40,"Iosif Zaharyenko,");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
             mRender->DebugPrint(440,124-40,"Griwa Le~kin");
+			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
+			mRender->DebugPrint(440, 148 - 40, "Artemi~ Kislov");
 
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
             mRender->DebugPrint(40,172-40,"Vebsa~t:");
@@ -2718,17 +2736,20 @@ void StateMenu::Draw(StateManager* sManager)
 
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
             mRender->DebugPrint(40,196-40,"Versi^:");
+			mRender->SetFont(ENGLISH);
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,196-40,"2.2");
+            mRender->DebugPrint(440,196-40,"2.2.1b");
+			mRender->SetDefaultFont();
 
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
             mRender->DebugPrint(40,220-40,"Stadi^ razrabotki:");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,220-40,"Test");
+            mRender->DebugPrint(440,220-40,"Beta");
 
             aboutPos == 0 ? DrawText(240,234,GU_COLOR(1,1,0.25,1) ,default_size,"Konverter") : DrawText(240,234,GU_COLOR(1,1,1,1) ,default_size,"Konverter");
             aboutPos == 1 ? DrawText(240,264,GU_COLOR(1,1,0.25,1) ,default_size,"Otmena") : DrawText(240,264,GU_COLOR(1,1,1,1) ,default_size,"Otmena");
             DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Ob igre");
+			DrawText(90, 269, GU_COLOR(1, 1, 1, 1), default_size, "V@bor");
         }
     }
     break;
@@ -2806,6 +2827,9 @@ void StateMenu::Draw(StateManager* sManager)
         buttonSprite->SetPosition(240,230);
         buttonSprite->Draw();
 
+		button1Sprite->SetPosition(50, 260);
+		button1Sprite->Draw();
+
         if(generateSelectPose > 1)
         {
             sbuttonSprite->SetPosition(240,150+(generateSelectPose-2)*40);
@@ -2850,6 +2874,8 @@ void StateMenu::Draw(StateManager* sManager)
             }
 
             generateSelectPose == 4 ? DrawText(240,239,GU_COLOR(1,1,0.25,1) ,default_size,"Create New World") : DrawText(240,239,GU_COLOR(1,1,1,1) ,default_size,"Create New World");
+			DrawText(90, 269, GU_COLOR(1, 1, 1, 1), default_size, "Choose");
+
         }
         if(mRender->GetFontLanguage() == RUSSIAN)
         {
@@ -2881,6 +2907,7 @@ void StateMenu::Draw(StateManager* sManager)
             }
 
             generateSelectPose == 4 ? DrawText(240,239,GU_COLOR(1,1,0.25,1) ,default_size,"Sozdat$ nov@~ mir") : DrawText(240,239,GU_COLOR(1,1,1,1) ,default_size,"Sozdat$ nov@~ mir");
+			DrawText(90, 269, GU_COLOR(1, 1, 1, 1), default_size, "V@brat$");
         }
 
         mRender->SetFont(ENGLISH);

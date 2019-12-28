@@ -2931,6 +2931,8 @@ void WorldGenerator::initDungeons(int WORLD_SIZE, CraftWorld *world)
             NewChest->chestSlotSt[26] = true;
             world->mChests.push_back(NewChest);
         }
+
+
     }
 }
 

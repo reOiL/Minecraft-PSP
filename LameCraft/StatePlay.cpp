@@ -417,11 +417,11 @@ void StatePlay::LoadTextures()
     float utilScale = 364.0f/(float)utilsSize;
 
     barSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Utils),0*utilsSize/182,0*utilsSize/182,182*utilsSize/182,22*utilsSize/182);
-    barSprite->SetPosition(240,250);
+    barSprite->SetPosition(240,220);
     barSprite->Scale(utilScale,utilScale);
 
     selectSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Utils),0*utilsSize/182,22*utilsSize/182,24*utilsSize/182,24*utilsSize/182);
-    selectSprite->SetPosition(80,250);
+    selectSprite->SetPosition(80,220);
     selectSprite->Scale(utilScale,utilScale);
 
     crossSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Utils),24*utilsSize/182,22*utilsSize/182,9*utilsSize/182,9*utilsSize/182);
@@ -3479,7 +3479,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                     }
                     barPosition != 8 ? barPosition ++ : barPosition = 0;
 
-                    selectSprite->SetPosition(80 + (barPosition * 40),250);
+                    selectSprite->SetPosition(80 + (barPosition * 40),220);
 
                     tickShowSlotName = 1.25f;
 
@@ -3499,7 +3499,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                     }
                     barPosition != 0 ? barPosition -- : barPosition = 8;
 
-                    selectSprite->SetPosition(80 + (barPosition * 40),250);
+                    selectSprite->SetPosition(80 + (barPosition * 40),220);
 
                     tickShowSlotName = 1.25f;
 
@@ -3680,6 +3680,16 @@ void StatePlay::HandleEvents(StateManager* sManager)
                             slowdown -= 0.2f;
                             slowdown2 -= 0.2f;
                         }
+						if (mWorld->HG > 3 && keyHold(InputHelper::Instance()->getButtonToAction(10)))
+						{
+							slowdown = 1.5f;
+							slowdown2 = 1.7f;
+							mWorld->HG -= 0.01;
+						}
+						else
+						{
+							slowdown = 0.8f; slowdown2 = 1.0f;
+						}
                         if(slowdown < 0.72)
                         {
                             slowdown = 0.72f;
@@ -11299,7 +11309,7 @@ void StatePlay::Draw(StateManager* sManager)
 
                 if(mWorld->invId[27+k] < 250)
                 {
-                    MatrixTranslation(Vector3(80+k*40,250,0));
+                    MatrixTranslation(Vector3(80+k*40,220,0));
                     TextureManager::Instance()->SetTextureModeulate(texture);
 
                     sceGuDisable(GU_DEPTH_TEST);
@@ -11333,7 +11343,7 @@ void StatePlay::Draw(StateManager* sManager)
 
                 if(mWorld->invId[27+k] >= 250)
                 {
-                    MatrixTranslation(Vector3(80+k*40,250,0));
+                    MatrixTranslation(Vector3(80+k*40,220,0));
                     mWorld->ItemHaveTerrainTexture(mWorld->invId[27+k]) ? TextureManager::Instance()->SetTextureModeulate(texture) : TextureManager::Instance()->SetTextureModeulate(barItems);
 
                     MatrixAngle(Vector3(0,0,0));
@@ -11738,7 +11748,7 @@ void StatePlay::Draw(StateManager* sManager)
                     {
                         unsigned int toolPointStd = roundf((float)(mWorld->invAm[27+k]) / (float)(mWorld->DurabilityPointsItem(mWorld->invId[27+k])) * 13);
 
-                        toolPointSprite[toolPointStd]->SetPosition(68+k*40,260);
+                        toolPointSprite[toolPointStd]->SetPosition(68+k*40,230);
                         toolPointSprite[toolPointStd]->Draw();
                     }
                 }
@@ -12126,12 +12136,12 @@ void StatePlay::Draw(StateManager* sManager)
                 {
                     if(mWorld->DurabilityPointsItem(mWorld->invId[27+k]) == -1)
                     {
-                        DrawAmount(90+k*40,276,mWorld->invAm[27+k]);
+                        DrawAmount(90+k*40,246,mWorld->invAm[27+k]);
                     }
                 }
                 else
                 {
-                    DrawAmount(90+k*40,276,mWorld->invAm[27+k]);
+                    DrawAmount(90+k*40,246,mWorld->invAm[27+k]);
                 }
             }
         }

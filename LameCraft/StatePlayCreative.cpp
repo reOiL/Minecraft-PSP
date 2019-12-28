@@ -430,12 +430,18 @@ void StatePlayCreative::LoadTextures()
     float utilsSize = TextureManager::Instance()->getWidth(TextureHelper::Instance()->GetTexture(TextureHelper::Utils));
     int utilScale = 364.0f/utilsSize;
 
+	cstc_buttonSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::cstc_button));
+	cstc_buttonSprite->SetPosition(50, 260);
+
+	LTriggerSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::LTrigger));
+	LTriggerSprite->SetPosition(105, 260);
+
     barSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Utils),0,0,182*utilsSize/182,22*utilsSize/182);
-    barSprite->SetPosition(240,250);
+    barSprite->SetPosition(240,220);
     barSprite->Scale(utilScale,utilScale);
 
     selectSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Utils),0,22*utilsSize/182,24*utilsSize/182,24*utilsSize/182);
-    selectSprite->SetPosition(80,250);
+    selectSprite->SetPosition(80,220);
     selectSprite->Scale(utilScale,utilScale);
 
     crossSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Utils),24*utilsSize/182,22*utilsSize/182,9*utilsSize/182,9*utilsSize/182);
@@ -745,6 +751,9 @@ void StatePlayCreative::CleanUp()
 
     delete furSprite;
     delete waterScreen;
+
+	delete cstc_buttonSprite;
+	delete LTriggerSprite;
 
     for(unsigned int i = 0; i <= 13; i++)
     {
@@ -3682,6 +3691,15 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                         slowdown -= 0.2f;
                         slowdown2 -= 0.2f;
                     }
+					if (keyHold(InputHelper::Instance()->getButtonToAction(10)))
+					{
+						slowdown = 1.5f;
+						slowdown2 = 1.7f;
+					}
+					else 
+					{ 
+						slowdown = 0.8f; slowdown2 = 1.0f; 
+					}
                     if(slowdown < 0.72)
                     {
                         slowdown = 0.72f;
@@ -3865,7 +3883,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 }
                 barPosition != 8 ? barPosition ++ : barPosition = 0;
 
-                selectSprite->SetPosition(80 + (barPosition * 40),250);
+                selectSprite->SetPosition(80 + (barPosition * 40),220);
 
                 tickShowSlotName = 1.25f;
 
@@ -3886,7 +3904,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 }
                 barPosition != 0 ? barPosition -- : barPosition = 8;
 
-                selectSprite->SetPosition(80 + (barPosition * 40),250);
+                selectSprite->SetPosition(80 + (barPosition * 40),220);
 
                 tickShowSlotName = 1.25f;
 
@@ -9597,8 +9615,15 @@ void StatePlayCreative::Draw(StateManager* sManager)
 	sceGuEnable(GU_BLEND);
 	sceGuColor(GU_COLOR(1,1,1,1.0f));
 
+	
+
 	if ((invEn == false && craft3xEn == false && chestEn == false && furnaceEn == false && menuState == 0 && mWorld->mainOptions.guiDrawing == 1) || makeScreen == true)
     {
+		cstc_buttonSprite->SetPosition(20, 260);
+		cstc_buttonSprite->Draw();
+		LTriggerSprite->SetPosition(145, 257);
+		LTriggerSprite->Draw();
+
         barSprite->Draw();
         if (menuState != 1)
         {
@@ -9607,6 +9632,17 @@ void StatePlayCreative::Draw(StateManager* sManager)
             sceGuBlendFunc(GU_ADD, GU_SRC_ALPHA, GU_ONE_MINUS_SRC_ALPHA, 0, 0);
             selectSprite->Draw();
         }
+		if (RenderManager::InstancePtr()->GetFontLanguage() == ENGLISH)
+		{
+			DrawText(85, 267, GU_COLOR(1, 1, 1, 1), default_size, "Look around");
+			DrawText(180, 267, GU_COLOR(1, 1, 1, 1), default_size, "Break");
+
+		}
+		if (RenderManager::InstancePtr()->GetFontLanguage() == RUSSIAN)
+		{
+			DrawText(75, 270, GU_COLOR(1, 1, 1, 1), default_size, "Osmotret$s^");
+			DrawText(185, 270, GU_COLOR(1, 1, 1, 1), default_size, "Lomat$");
+		}
     }
     else
     {
@@ -9679,7 +9715,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
             if(mWorld->invId[27+k] != -1)
             {
                 MatrixPush();
-                MatrixTranslation(Vector3(80+k*40,250,0));
+                MatrixTranslation(Vector3(80+k*40,220,0));
 
                 if(mWorld->invId[27+k] < 250)
                 {
@@ -10371,12 +10407,12 @@ void StatePlayCreative::Draw(StateManager* sManager)
                 {
                     if(mWorld->DurabilityPointsItem(mWorld->invId[27+k]) == -1)
                     {
-                        DrawAmount(90+k*40,276,mWorld->invAm[27+k]);
+                        DrawAmount(90+k*40,246,mWorld->invAm[27+k]);
                     }
                 }
                 else
                 {
-                    DrawAmount(90+k*40,276,mWorld->invAm[27+k]);
+                    DrawAmount(90+k*40,246,mWorld->invAm[27+k]);
                 }
             }
         }

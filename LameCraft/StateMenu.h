@@ -146,8 +146,6 @@ private:
 
 	Sprite *button1Sprite;
 	Sprite *button2Sprite;
-	Sprite *langSprite;
-	Sprite *slangPrite;
 
     Sprite *buttonSmallSprite;
 	Sprite *sbuttonSmallSprite;
