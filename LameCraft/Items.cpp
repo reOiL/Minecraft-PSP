@@ -1683,6 +1683,26 @@ Disk12::Disk12():BaseItem()
 
 item_t Disk12::getID(){ return 391;}
 
+RawMutton::RawMutton() :BaseItem()
+{
+	textureRow = 6;
+	plane = 9;
+	furnItem = 393;
+
+	name = "Raw Mutton";
+}
+item_t RawMutton::getID() { return 392;}
+
+Mutton::Mutton() :BaseItem()
+{
+	textureRow = 7;
+	plane = 9;
+
+	name = "Mutton";
+}
+
+item_t Mutton::getID() { return 393;}
+
 
 
 

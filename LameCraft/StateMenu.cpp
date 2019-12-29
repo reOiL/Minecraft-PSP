@@ -2262,7 +2262,7 @@ void StateMenu::Draw(StateManager* sManager)
             selectPos == 4 ? DrawText(240,239,GU_COLOR(1,1,0.25,1) ,default_size,"What's New?") : DrawText(240,239,GU_COLOR(1,1,1,1) ,default_size,"What's New?");
             selectPos == 5 ? DrawText(240,269,GU_COLOR(1,1,0.25,1) ,default_size,"Language") : DrawText(240,269,GU_COLOR(1,1,1,1) ,default_size,"Language");
             DrawText(90,269,GU_COLOR(1,1,1,1) ,default_size,"Choose"); 
-			DrawText(444, 269, GU_COLOR(1, 1, 1, 1), default_size, "v.2.2.1b");
+			DrawText(444, 269, GU_COLOR(1, 1, 1, 1), default_size, "v.2.2.5");
 
 
             switch(SplashNumber)
@@ -2287,7 +2287,7 @@ void StateMenu::Draw(StateManager* sManager)
             selectPos == 5 ? DrawText(240,269,GU_COLOR(1,1,0.25,1) ,default_size,"Lokalizaci^") : DrawText(240,269,GU_COLOR(1,1,1,1) ,default_size,"Lokalizaci^");
             DrawText(90,269,GU_COLOR(1,1,1,1) ,default_size,"V@bor");
 			RenderManager::InstancePtr()->SetFont(ENGLISH);
-			DrawText(444, 269, GU_COLOR(1, 1, 1, 1), default_size, "v.2.2.1b");
+			DrawText(444, 269, GU_COLOR(1, 1, 1, 1), default_size, "v.2.2.5");
 			mRender->SetDefaultFont();
 
 
@@ -2295,7 +2295,7 @@ void StateMenu::Draw(StateManager* sManager)
             {
                 case 0: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"Na S++!"); break;
                 case 1: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"Fanatska^ rabota!"); break;
-                case 2: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"Uje 3 goda s vami!"); break;
+                case 2: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"Uje 2 goda s vami!"); break;
                 case 3: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"Bol$we poligonov!"); break;
                 case 4: DrawText(348,86,GU_COLOR(1,1,0,1) ,0.4+sinf(splashSize)*0.03f,"zdes$ net trav@"); break;
                 case 5: {
@@ -2599,7 +2599,7 @@ void StateMenu::Draw(StateManager* sManager)
                 }
 
                 loadSelectPos == 0 ? DrawText(120,231,GU_COLOR(1,1,0.25,1),default_size,"Igrat$ v v@brannom mire") : DrawText(120,231,GU_COLOR(buttonTextColor,buttonTextColor,buttonTextColor,1),default_size,"Igrat$ v v@brannom mire");
-                loadSelectPos == 1 ? DrawText(67.75f,264,GU_COLOR(1,1,0.25,1) ,default_size,"Pereimenovat$") : DrawText(67.75f,264,GU_COLOR(buttonTextColor,buttonTextColor,buttonTextColor,1) ,default_size,"Pereimenovat$");
+                loadSelectPos == 1 ? DrawText(67.75f,264,GU_COLOR(1,1,0.25,1) ,default_size,"Pereimenov.") : DrawText(67.75f,264,GU_COLOR(buttonTextColor,buttonTextColor,buttonTextColor,1) ,default_size,"Pereimenov.");
                 loadSelectPos == 2 ? DrawText(172.25f,264,GU_COLOR(1,1,0.25,1) ,default_size,"Udalit$") : DrawText(172.25f,264,GU_COLOR(buttonTextColor,buttonTextColor,buttonTextColor,1) ,default_size,"Udalit$");
                 loadSelectPos == 3 ? DrawText(360,231,GU_COLOR(1,1,0.25,1) ,default_size,"Sozdat$ nov@~ mir") : DrawText(360,231,GU_COLOR(1.0f,1.0f,1.0f,1) ,default_size,"Sozdat$ nov@~ mir");
                 loadSelectPos == 4 ? DrawText(360,264,GU_COLOR(1,1,0.25,1) ,default_size,"Otmena") : DrawText(360,264,GU_COLOR(1.0f,1.0f,1.0f,1) ,default_size,"Otmena");
@@ -2691,7 +2691,7 @@ void StateMenu::Draw(StateManager* sManager)
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
             mRender->DebugPrint(440,100-40,"Joseph730,");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,124-40,"reOiL");
+            mRender->DebugPrint(440,124-40,"reOiL,");
 			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
 			mRender->DebugPrint(440, 148 - 40, "Answored");
 
@@ -2703,12 +2703,12 @@ void StateMenu::Draw(StateManager* sManager)
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
             mRender->DebugPrint(40,196-40,"Version:");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,196-40,"2.2.1b");
+            mRender->DebugPrint(440,196-40,"2.2.5");
 
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
             mRender->DebugPrint(40,220-40,"Development stage:");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,220-40,"Beta");
+            mRender->DebugPrint(440,220-40,"Reliz");
 
             aboutPos == 0 ? DrawText(240,234,GU_COLOR(1,1,0.25,1) ,default_size,"Converter") : DrawText(240,234,GU_COLOR(1,1,1,1) ,default_size,"Converter");
             aboutPos == 1 ? DrawText(240,264,GU_COLOR(1,1,0.25,1) ,default_size,"Cancel") : DrawText(240,264,GU_COLOR(1,1,1,1) ,default_size,"Cancel");
@@ -2722,7 +2722,7 @@ void StateMenu::Draw(StateManager* sManager)
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
             mRender->DebugPrint(440,100-40,"Iosif Zaharyenko,");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,124-40,"Griwa Le~kin");
+            mRender->DebugPrint(440,124-40,"Griwa Le~kin,");
 			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
 			mRender->DebugPrint(440, 148 - 40, "Artemi~ Kislov");
 

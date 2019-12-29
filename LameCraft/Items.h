@@ -1280,5 +1280,20 @@ public:
 
 	static item_t getID();
 };
+class RawMutton : public BaseItem
+{
+public:
 
+	RawMutton();
+
+	static item_t getID();
+};
+class Mutton : public BaseItem
+{
+public:
+
+	Mutton();
+
+	static item_t getID();
+};
 #endif

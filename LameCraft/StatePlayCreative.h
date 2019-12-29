@@ -277,6 +277,9 @@ private:
 
 	Sprite *cstc_buttonSprite;
 	Sprite *LTriggerSprite;
+	Sprite *RTriggerSprite;
+	Sprite *UpSprite;
+	Sprite *SelectSprite;
 
 	Sprite *furArrowSprite[22];
 	Sprite *furFireSprite[14];

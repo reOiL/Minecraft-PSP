@@ -737,6 +737,9 @@ void CraftWorld::InitItemVector()
     itemTypes.push_back(Disk10());
     itemTypes.push_back(Disk11());
     itemTypes.push_back(Disk12());
+	itemTypes.push_back(RawMutton());
+	itemTypes.push_back(Mutton());
+
 }
 
 void CraftWorld::UpdateBlocksAndItemsName()
@@ -986,11 +989,14 @@ void CraftWorld::UpdateBlocksAndItemsName()
         itemTypes[130].name = "Peyenn@~ kartofel$";
         itemTypes[131].name = "]dovit@~ kartofel$";
         itemTypes[132].name = "Morkov$";
+		itemTypes[142].name = "S@ra^ Baranina";
+		itemTypes[143].name = "Baranina";
 
         for(int i = 133; i <= 141; i++)
         {
             itemTypes[i].name = "Muz@kal$na^ plastinka";
         }
+		
     }
 }
 

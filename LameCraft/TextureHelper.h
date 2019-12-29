@@ -84,7 +84,10 @@ public:
 		button1,
 		button2,
 		cstc_button,
-		LTrigger
+		LTrigger,
+		RTrigger,
+		Up,
+		Select
 	};
     std::string texturePatch;
     std::string defaultFolder;

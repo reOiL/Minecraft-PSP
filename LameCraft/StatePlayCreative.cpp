@@ -435,6 +435,12 @@ void StatePlayCreative::LoadTextures()
 
 	LTriggerSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::LTrigger));
 	LTriggerSprite->SetPosition(105, 260);
+	RTriggerSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::RTrigger));
+	RTriggerSprite->SetPosition(205, 260);
+	UpSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Up));
+	UpSprite->SetPosition(275, 257);
+	SelectSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Select));
+	SelectSprite->SetPosition(310, 257);
 
     barSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Utils),0,0,182*utilsSize/182,22*utilsSize/182);
     barSprite->SetPosition(240,220);
@@ -666,6 +672,8 @@ void StatePlayCreative::InitCreativeInventory()
     inventoryItems.push_back(WhiteBread::getID());
     inventoryItems.push_back(RawBeef::getID());
     inventoryItems.push_back(Steak::getID());
+	inventoryItems.push_back(RawMutton::getID());
+	inventoryItems.push_back(Mutton::getID());
     inventoryItems.push_back(Busket::getID());
     inventoryItems.push_back(MilkBusket::getID());
     inventoryItems.push_back(SnowBallItem::getID());
@@ -754,6 +762,9 @@ void StatePlayCreative::CleanUp()
 
 	delete cstc_buttonSprite;
 	delete LTriggerSprite;
+	delete RTriggerSprite;
+	delete UpSprite;
+	delete SelectSprite;
 
     for(unsigned int i = 0; i <= 13; i++)
     {
@@ -9623,6 +9634,12 @@ void StatePlayCreative::Draw(StateManager* sManager)
 		cstc_buttonSprite->Draw();
 		LTriggerSprite->SetPosition(145, 257);
 		LTriggerSprite->Draw();
+		RTriggerSprite->SetPosition(215, 257);
+		RTriggerSprite->Draw();
+		UpSprite->SetPosition(275, 260);
+		UpSprite->Draw();
+		SelectSprite->SetPosition(335, 260);
+		SelectSprite->Draw();
 
         barSprite->Draw();
         if (menuState != 1)
@@ -9636,12 +9653,19 @@ void StatePlayCreative::Draw(StateManager* sManager)
 		{
 			DrawText(85, 267, GU_COLOR(1, 1, 1, 1), default_size, "Look around");
 			DrawText(180, 267, GU_COLOR(1, 1, 1, 1), default_size, "Break");
+			DrawText(245, 267, GU_COLOR(1, 1, 1, 1), default_size, "Use");
+			DrawText(305, 267, GU_COLOR(1, 1, 1, 1), default_size, "Run");
+			DrawText(370, 267, GU_COLOR(1, 1, 1, 1), default_size, "Jump");
 
 		}
 		if (RenderManager::InstancePtr()->GetFontLanguage() == RUSSIAN)
 		{
 			DrawText(75, 270, GU_COLOR(1, 1, 1, 1), default_size, "Osmotret$s^");
 			DrawText(185, 270, GU_COLOR(1, 1, 1, 1), default_size, "Lomat$");
+			DrawText(245, 270, GU_COLOR(1, 1, 1, 1), default_size, "Isp.");
+			DrawText(295, 270, GU_COLOR(1, 1, 1, 1), default_size, "Beg");
+			DrawText(375, 270, GU_COLOR(1, 1, 1, 1), default_size, "Pr@jok");
+
 		}
     }
     else

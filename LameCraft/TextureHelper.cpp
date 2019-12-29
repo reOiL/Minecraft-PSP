@@ -84,6 +84,9 @@ void TextureHelper::Init()
 	FastLoadTexture("title/Circle.png");
 	FastLoadTexture("title/cstc.png");
 	FastLoadTexture("title/LTrigger.png");
+	FastLoadTexture("title/RTrigger.png");
+	FastLoadTexture("title/Up.png");
+	FastLoadTexture("title/Select.png");
 }
 
 int TextureHelper::GetTexture(Textures texture)
@@ -486,6 +489,24 @@ int TextureHelper::GetTexture(Textures texture)
 			return TextureManager::Instance()->GetTextureNumber(fileName);
 		}
 		break;
+		case RTrigger:
+		{
+			fileName = texturePatch + "title/RTrigger.png";
+			return TextureManager::Instance()->GetTextureNumber(fileName);
+		}
+		break;
+		case Up:
+		{
+			fileName = texturePatch + "title/Up.png";
+			return TextureManager::Instance()->GetTextureNumber(fileName);
+		}
+		break;
+		case Select:
+		{
+			fileName = texturePatch + "title/Select.png";
+			return TextureManager::Instance()->GetTextureNumber(fileName);
+		}
+		break;
 
 	}
 	return 0;
@@ -562,6 +583,9 @@ void TextureHelper::SetTexturePack(std::string name)
 	FastLoadTexture("title/Circle.png");
 	FastLoadTexture("title/cstc.png");
 	FastLoadTexture("title/LTrigger.png");
+	FastLoadTexture("title/RTrigger.png");
+	FastLoadTexture("title/Up.png");
+	FastLoadTexture("title/Select.png");
 }
 
 void TextureHelper::FastRemoveTexture(std::string name)
