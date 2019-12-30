@@ -2708,7 +2708,7 @@ void StateMenu::Draw(StateManager* sManager)
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
             mRender->DebugPrint(40,220-40,"Development stage:");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,220-40,"Reliz");
+            mRender->DebugPrint(440,220-40,"Release");
 
             aboutPos == 0 ? DrawText(240,234,GU_COLOR(1,1,0.25,1) ,default_size,"Converter") : DrawText(240,234,GU_COLOR(1,1,1,1) ,default_size,"Converter");
             aboutPos == 1 ? DrawText(240,264,GU_COLOR(1,1,0.25,1) ,default_size,"Cancel") : DrawText(240,264,GU_COLOR(1,1,1,1) ,default_size,"Cancel");
@@ -2736,15 +2736,13 @@ void StateMenu::Draw(StateManager* sManager)
 
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
             mRender->DebugPrint(40,196-40,"Versi^:");
-			mRender->SetFont(ENGLISH);
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,196-40,"2.2.1b");
-			mRender->SetDefaultFont();
+            mRender->DebugPrint(440,196-40,"2.2.5");
 
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
             mRender->DebugPrint(40,220-40,"Stadi^ razrabotki:");
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,220-40,"Beta");
+            mRender->DebugPrint(440,220-40,"Reliz");
 
             aboutPos == 0 ? DrawText(240,234,GU_COLOR(1,1,0.25,1) ,default_size,"Konverter") : DrawText(240,234,GU_COLOR(1,1,1,1) ,default_size,"Konverter");
             aboutPos == 1 ? DrawText(240,264,GU_COLOR(1,1,0.25,1) ,default_size,"Otmena") : DrawText(240,264,GU_COLOR(1,1,1,1) ,default_size,"Otmena");
@@ -3359,16 +3357,46 @@ void StateMenu::Draw(StateManager* sManager)
         button2Sprite->SetPosition(50,260);
         button2Sprite->Draw();
 
+		
+
+
         if(RenderManager::InstancePtr()->GetFontLanguage() == ENGLISH)
         {
             DrawText(90,269,GU_COLOR(1,1,1,1) ,default_size,"Back");
             DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Last Changes");
+			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+			mRender->DebugPrint(20, 100 - 40, "- Added HUD hints");
+			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+			mRender->DebugPrint(20, 124 - 40, "- Added animated background in menu");
+			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+			mRender->DebugPrint(20, 148 - 40, "and loading");
+			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+			mRender->DebugPrint(20, 172 - 40, "- Changing localization in menu");
+			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+			mRender->DebugPrint(20, 196 - 40, "- Added raw and cooked mutton");
+			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+			mRender->DebugPrint(20, 220 - 40, "- Added sprint with stamina");
+			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+			mRender->DebugPrint(20, 244 - 40, "- Changed loading inteface");
         }
 
         if(RenderManager::InstancePtr()->GetFontLanguage() == RUSSIAN)
         {
             DrawText(90,269,GU_COLOR(1,1,1,1) ,default_size,"Nazad");
             DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Poslednie izmeneni^");
+			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+			mRender->DebugPrint(20, 100 - 40, "- Dobavlen@ podskazki");
+			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+			mRender->DebugPrint(20, 124 - 40, "- Dobavlen amimirovann@~ fon v menq i zagruzke");
+			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+			mRender->DebugPrint(20, 148 - 40, "- Izmenenie lokalizacii v menq");
+			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+			mRender->DebugPrint(20, 172 - 40, "- Dobavlena s@ra^ i prigotovlenna^ baranina");
+			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+			mRender->DebugPrint(20, 196 - 40, "- Dobavlen sprint s v@noslivost$q");
+			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+			mRender->DebugPrint(20, 220 - 40, "- Izmenen interfe~s zagruzki");
+
         }
     }
     break;

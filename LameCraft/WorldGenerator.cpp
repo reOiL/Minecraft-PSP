@@ -2419,6 +2419,7 @@ void WorldGenerator::initPumpkins(int WORLD_SIZE, CraftWorld *world)
 {
     int NumPumpkinsSpawns = 12 + rand() % 4;
     int Frequency = 4; // 1 - 100
+	
 
     for (int i = 0; i < NumPumpkinsSpawns; ++i)
     {
